@@ -1,7 +1,7 @@
 # flujmyg
 
 A new Flutter project.
-
+用Flutter实现的江门义工查询
 ## Getting Started
 
 This project is a starting point for a Flutter application.
