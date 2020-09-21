@@ -1,13 +1,60 @@
+import 'package:flujmyg/denglumodel.dart';
+import 'package:flujmyg/firstpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flujmyg/countermodel.dart';
 import 'package:provider/provider.dart';
+import 'package:flujmyg/HttpDio.dart';
+import 'dart:convert';
+import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 class DengLuView extends StatefulWidget {
   @override
   _DengLuViewState createState() => _DengLuViewState();
 }
 
 class _DengLuViewState extends State<DengLuView> {
+
+  DengModel dengModel = DengModel();
+  int dengStateCode = 1;
+
+
+  @override
+  void initState() { 
+    super.initState();
+    //dengFunc();
+  }
+
+  void dengFunc() async{
+    var url = 'http://113.107.136.252/Mobile/Service/login.do';
+    Map<String, dynamic> formData = {'UserId':'wyu3116003219','Password':'maijunjie123'};
+    dengModel.userId = 'wyu3116003219';
+    dengModel.password = 'maijunjie123';
+    print(dengModel.toJson());
+    await request(url,formData: formData).then((value){
+      var data = json.decode(value.toString());
+      print(data.toString());
+      dengModel = DengModel.fromJson(data);
+      print(dengModel.resultCode);
+      dengStateCode = dengModel.resultCode;
+
+      if (dengStateCode == 1) {
+          print('登录失败');
+          SVProgressHUD.showError('登录失败');
+          SVProgressHUD.dismissWithDelay(1500);
+          dengStateCode = 1;
+      }else if(dengStateCode == 0){
+          print('登录成功');
+          SVProgressHUD.showSuccess('登录成功');
+          SVProgressHUD.dismissWithDelay(1500);
+          
+          dengStateCode = 1;
+          
+          Navigator.pop(context, MaterialPageRoute(builder: (context) {return FirstPage();})); //成功的话就返回上一页
+      }
+    });
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,6 +89,8 @@ class _DengLuViewState extends State<DengLuView> {
             onPressed: () => {
               print('点我干嘛'),
               //加入登录函数
+              dengFunc(),
+              
               }
             ),
         ]
