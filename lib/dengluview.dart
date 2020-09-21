@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:flujmyg/HttpDio.dart';
 import 'dart:convert';
 import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
+import 'package:flujmyg/sessionStrmodel.dart';
+
 class DengLuView extends StatefulWidget {
   @override
   _DengLuViewState createState() => _DengLuViewState();
@@ -37,6 +39,8 @@ class _DengLuViewState extends State<DengLuView> {
       print(dengModel.resultCode);
       dengStateCode = dengModel.resultCode;
 
+      //将返回的sessionStr的数据通过provider状态管理回传给其他有需要用到的页面
+      Provider.of<SessionStr>(context, listen: false).addSessionStr(dengModel.sessionStr);
       if (dengStateCode == 1) {
           print('登录失败');
           SVProgressHUD.showError('登录失败');
@@ -48,7 +52,8 @@ class _DengLuViewState extends State<DengLuView> {
           SVProgressHUD.dismissWithDelay(1500);
           
           dengStateCode = 1;
-          
+          // Provider.of<SessionStr>(context, listen: false).addSessionStr(dengModel.sessionStr);
+
           Navigator.pop(context, MaterialPageRoute(builder: (context) {return FirstPage();})); //成功的话就返回上一页
       }
     });

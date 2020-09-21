@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flujmyg/firstpage.dart';
 import 'package:provider/provider.dart';
 import 'package:flujmyg/countermodel.dart';
+import 'package:flujmyg/sessionStrmodel.dart';
 void main() {
   runApp(MyApp());
 }
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider<Counter>(create:(context) => Counter(),),
+      ChangeNotifierProvider<SessionStr>(create:(context) => SessionStr(),),
     ],
     child: MaterialApp(
       title: "provider实例",
