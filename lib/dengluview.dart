@@ -8,6 +8,9 @@ import 'package:flujmyg/HttpDio.dart';
 import 'dart:convert';
 import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 import 'package:flujmyg/sessionStrmodel.dart';
+import 'package:flujmyg/ygInfoModel.dart';
+import 'package:flujmyg/localRealNameModel.dart';
+import 'package:flujmyg/localDeptNameModel.dart';
 
 class DengLuView extends StatefulWidget {
   @override
@@ -16,9 +19,17 @@ class DengLuView extends StatefulWidget {
 
 class _DengLuViewState extends State<DengLuView> {
 
+  final userIdContrl = TextEditingController();
+  final pswdIdContrl = TextEditingController();
+
   DengModel dengModel = DengModel();
   
   int dengStateCode = 1;
+
+  YgInfoModel ygInfo = YgInfoModel();
+  
+  String localRealName = '666';
+  String localDeptName = '666';
 
 
   @override
@@ -27,9 +38,19 @@ class _DengLuViewState extends State<DengLuView> {
     //dengFunc();
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    userIdContrl.dispose();
+    pswdIdContrl.dispose();
+  }
+  String dengUserId = '';
+  String dengPassword = '';
   void dengFunc() async{
     var url = 'http://113.107.136.252/Mobile/Service/login.do';
-    Map<String, dynamic> formData = {'UserId':'wyu3116003219','Password':'maijunjie123'};
+    Map<String, dynamic> formData = {'UserId':dengUserId,'Password':dengPassword};
     dengModel.userId = 'wyu3116003219';
     dengModel.password = 'maijunjie123';
     print(dengModel.toJson());
@@ -48,9 +69,11 @@ class _DengLuViewState extends State<DengLuView> {
           SVProgressHUD.dismissWithDelay(1500);
           dengStateCode = 1;
       }else if(dengStateCode == 0){
+          dengFunc3(dengModel.sessionStr);
           print('登录成功');
           SVProgressHUD.showSuccess('登录成功');
           SVProgressHUD.dismissWithDelay(1500);
+          
           
           dengStateCode = 1;
           // Provider.of<SessionStr>(context, listen: false).addSessionStr(dengModel.sessionStr);
@@ -61,6 +84,36 @@ class _DengLuViewState extends State<DengLuView> {
     
   }
 
+  void dengFunc3(String gotSessionStr) async{
+    var url = 'http://113.107.136.252/Mobile/Service/userinfo.do';
+    Map<String, dynamic> formData = {'sessionStr': gotSessionStr };
+    //dengModel.userId = 'wyu3116003219';
+    //dengModel.password = 'maijunjie123';
+    //print(dengModel.toJson());
+    await request(url,formData: formData).then((value){
+      var data = json.decode(value.toString());
+      //print(data.toString());
+      //dengModel = DengModel.fromJson(data);
+      ygInfo = YgInfoModel.fromJson(data);
+      print('bbbbbbbbbbbbbbb');
+      print(ygInfo.msg);
+      print(ygInfo.data[0].RealName);
+      localRealName = ygInfo.data[0].RealName;
+      Provider.of<LocalRealName>(context, listen: false).addLocalRealName(localRealName);
+      print(localRealName);
+      print(ygInfo.data[0].DeptName);
+      localDeptName = ygInfo.data[0].DeptName;
+      Provider.of<LocalDeptName>(context, listen: false).addlocalDeptName(localDeptName);
+      print(localDeptName);
+      //print(dengModel.resultCode);
+      //dengStateCode = dengModel.resultCode;
+
+      
+    });
+    
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -70,10 +123,12 @@ class _DengLuViewState extends State<DengLuView> {
           CupertinoTextField(
             placeholder: '义工账号一般为wyu+学号',
             prefix: Text("用户名:"),
+            controller: userIdContrl,
           ),
           CupertinoTextField(
             placeholder: '密码',
             prefix: Text("义工账户的密码:"),
+            controller: pswdIdContrl,
             obscureText: true, //密码隐藏
           ),
           CupertinoButton(
@@ -95,6 +150,8 @@ class _DengLuViewState extends State<DengLuView> {
             onPressed: () => {
               print('点我干嘛'),
               //加入登录函数
+              dengUserId = userIdContrl.text,
+              dengPassword = pswdIdContrl.text,
               dengFunc(),
               
               }

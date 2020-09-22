@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flujmyg/countermodel.dart';
 import 'package:flujmyg/sessionStrmodel.dart';
 import 'package:flujmyg/localRealNameModel.dart';
+import 'package:flujmyg/localDeptNameModel.dart';
 void main() {
   runApp(MyApp());
 }
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<Counter>(create:(context) => Counter(),),
       ChangeNotifierProvider<SessionStr>(create:(context) => SessionStr(),),
       ChangeNotifierProvider<LocalRealName>(create:(context) => LocalRealName(),),
+      ChangeNotifierProvider<LocalDeptName>(create:(context) => LocalDeptName(),),
     ],
     child: MaterialApp(
       title: "provider实例",

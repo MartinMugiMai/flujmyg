@@ -18,7 +18,7 @@ class SecondPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('第二个页面'),
+        title: Text('登录页面'),
       ),
       body: DengLuView(),
       floatingActionButton: FloatingActionButton(
