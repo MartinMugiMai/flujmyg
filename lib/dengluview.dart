@@ -17,6 +17,7 @@ class DengLuView extends StatefulWidget {
 class _DengLuViewState extends State<DengLuView> {
 
   DengModel dengModel = DengModel();
+  
   int dengStateCode = 1;
 
 
@@ -35,7 +36,7 @@ class _DengLuViewState extends State<DengLuView> {
     await request(url,formData: formData).then((value){
       var data = json.decode(value.toString());
       print(data.toString());
-      dengModel = DengModel.fromJson(data);
+      dengModel = DengModel.fromJson(data);//将返回的json数据传入dengModel实例
       print(dengModel.resultCode);
       dengStateCode = dengModel.resultCode;
 

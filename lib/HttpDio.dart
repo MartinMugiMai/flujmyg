@@ -6,9 +6,9 @@ import 'dart:convert';
 
 //class HttpDio {
 
-  List<Cookie> cookies = [
-   new Cookie("JSESSIONID", 'E6380C9D9DDF3B166599C04709BCC08D'),
-   ];
+  // List<Cookie> cookies = [
+  //  new Cookie("JSESSIONID", 'E6380C9D9DDF3B166599C04709BCC08D'),
+  //  ];
 
 
    Future request(url,{formData}) async{
