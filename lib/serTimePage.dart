@@ -17,7 +17,7 @@ class _SerTimePageState extends State<SerTimePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('历史服务'),
+        title: Text('服务时长'),
       ),
       body: WebView(
         initialUrl: 'http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}',
