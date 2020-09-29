@@ -1,8 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flujmyg/sessionStrmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flujmyg/HttpDio.dart';
+import 'package:x5_webview/x5_webview.dart';
+import 'package:x5_webview/x5_sdk.dart';
+import 'package:flutter/src/foundation/platform.dart';
+
 
 class SerTimePage extends StatefulWidget {
   @override
@@ -10,6 +15,21 @@ class SerTimePage extends StatefulWidget {
 }
 
 class _SerTimePageState extends State<SerTimePage> {
+
+
+  @override
+  void initState() { 
+    super.initState();
+    var isOk =  X5Sdk.init();
+    if (isOk == 1) {
+      print('x5 get');
+      
+    }else if (isOk == 0){
+      print('x5 no');
+
+    }
+  }
+  
   //String newUrl = 'http://113.107.136.252/Mobile/Service/userinfo.do?sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}';
   //String hereSessionStr = Provider.of<SessionStr>(context, listen: true).sessionStr;
   @override
@@ -19,7 +39,7 @@ class _SerTimePageState extends State<SerTimePage> {
         centerTitle: true,
         title: Text('服务时长'),
       ),
-      body: WebView(
+      body:WebView(
         initialUrl: 'http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}',
         javascriptMode: JavascriptMode.unrestricted,      
       ),

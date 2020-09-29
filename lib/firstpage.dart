@@ -13,6 +13,9 @@ import 'package:flujmyg/ygInfoModel.dart';
 import 'package:flujmyg/localRealNameModel.dart';
 import 'package:flujmyg/localDeptNameModel.dart';
 
+import 'package:x5_webview/x5_webview.dart';
+import 'package:x5_webview/x5_sdk.dart';
+import 'package:flutter/src/foundation/platform.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -144,12 +147,13 @@ class _FirstPageState extends State<FirstPage> {
               onPressed: () => {
                 print('点我干嘛'),
                 //加入跳转函数
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return HistorySerPage();
-                            }
-                          )
-                        )
-                
+                //'http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}'
+                if(defaultTargetPlatform == TargetPlatform.android){
+                  //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
+                  X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "历史活动")
+                }else{
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
+                }
                 }
               ),
 
@@ -171,14 +175,17 @@ class _FirstPageState extends State<FirstPage> {
               //点击事件
               onPressed: () => {
                 print('点我干嘛'),
+
                 //加入跳转函数
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return SerTimePage();
-                            }
-                          )
-                        )
-                
+                if(defaultTargetPlatform == TargetPlatform.android){
+                //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
+                X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "服务时长")
+                }else{
+                //Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
+                Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
                 }
+                
+                }//onPressed
               ),
 
             ],
