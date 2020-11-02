@@ -150,6 +150,7 @@ class _FirstPageState extends State<FirstPage> {
                 //'http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}'
                 if(defaultTargetPlatform == TargetPlatform.android){
                   //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
                   X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "历史活动")
                 }else{
                   Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
