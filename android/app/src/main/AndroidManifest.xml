@@ -15,11 +15,13 @@
 
 
     <application
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme" 
+        
         android:usesCleartextTraffic="true"
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flujmyg"
+        android:label="义工查询flu"
         android:icon="@mipmap/ic_launcher">
+        <!-- android:theme="@style/AppTheme" 跟flutter在安卓调用的x5webview的actionbar风格有关系 -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

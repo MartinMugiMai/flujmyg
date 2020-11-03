@@ -119,9 +119,9 @@ class _DengLuViewState extends State<DengLuView> {
     return Container(
       child: Column(
         children:<Widget>[
-          Text("${Provider.of<Counter>(context, listen: true).count}"),
+          //Text("${Provider.of<Counter>(context, listen: true).count}"),
           CupertinoTextField(
-            placeholder: '义工账号一般为wyu+学号',
+            placeholder: '邑大同学的义工账号一般为wyu+学号',
             prefix: Text("用户名:"),
             controller: userIdContrl,
           ),

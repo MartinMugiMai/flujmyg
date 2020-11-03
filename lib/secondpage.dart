@@ -20,15 +20,17 @@ class SecondPage extends StatelessWidget {
         centerTitle: true,
         title: Text('登录页面'),
       ),
-      body: DengLuView(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Provider.of<Counter>(context, listen: false).increment();
-          print("${Provider.of<Counter>(context, listen: false).count}");
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Center(
+        child: DengLuView(),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Provider.of<Counter>(context, listen: false).increment();
+      //     print("${Provider.of<Counter>(context, listen: false).count}");
+      //   },
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

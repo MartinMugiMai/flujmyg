@@ -118,87 +118,107 @@ class _FirstPageState extends State<FirstPage> {
                     ),
           ],
         ),
-        body: GestureDetector(
+        body: Center(
           child: Column(
             children: <Widget>[
-              Text("${wangStateCode}"),
-              //Text("${Provider.of<Counter>(context, listen: true).count}"),
+              //Text("${wangStateCode}"),
               
-              Text("${Provider.of<SessionStr>(context, listen: true).sessionStr}"),
-              Text('志愿者姓名：${hereRealName}'),
-              Text('所属组织：${hereDeptName}'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image(
+                    image: AssetImage('assets/flujmyg.png'),
+                    width: 1.5*102.4,
+                    height: 1.5*102.4,
+                    ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                      Text('志愿者姓名：${hereRealName}',style: TextStyle(fontSize: 20),),
+                      Text('所属组织：${hereDeptName}',style: TextStyle(fontSize: 10),),
+                      ],
+                    ),
+                  )
+                  
+                ],
+              ),
               
-              CupertinoButton(
-              //按钮控件布局
-              child: Text('历史服务'),
-              //内边距
-              padding: EdgeInsets.all(10.0),
-              //背景颜色
-              color: Colors.blue,
-              //onPress 为 null，禁用点击的背景颜色
-              disabledColor: Colors.grey,
-              //最小尺寸
-              minSize: 44.0,
-              //按下的透明度
-              pressedOpacity: 0.1,
-              //边框圆角
-              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-              //点击事件
-              onPressed: () => {
-                print('点我干嘛'),
-                //加入跳转函数
-                //'http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}'
-                if(defaultTargetPlatform == TargetPlatform.android){
-                  //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
-                  X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "历史活动")
-                }else{
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
-                }
-                }
+              //Text("${Provider.of<SessionStr>(context, listen: true).sessionStr}"),
+              // Text('志愿者姓名：${hereRealName}'),
+              // Text('所属组织：${hereDeptName}'),
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CupertinoButton(
+
+                    //按钮控件布局
+                    child: Text('历史服务'),
+                    //内边距
+                    padding: EdgeInsets.all(10.0),
+                    //背景颜色
+                    color: Colors.blue,
+                    //onPress 为 null，禁用点击的背景颜色
+                    disabledColor: Colors.grey,
+                    //最小尺寸
+                    minSize: 44.0,
+                    //按下的透明度
+                    pressedOpacity: 0.1,
+                    //边框圆角
+                    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                    //点击事件
+                    onPressed: () => {
+                    print('点我干嘛'),
+                    //加入跳转函数
+                    //'http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}'
+                    if(defaultTargetPlatform == TargetPlatform.android){
+                      //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
+                      X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "历史活动")
+                    }else{
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
+                    }
+                    }
+                  ),
+                  CupertinoButton(
+
+                    //按钮控件布局
+                    child: Text('服务时长'),
+                    //内边距
+                    padding: EdgeInsets.all(10.0),
+                    //背景颜色
+                    color: Colors.blue,
+                    //onPress 为 null，禁用点击的背景颜色
+                    disabledColor: Colors.grey,
+                    //最小尺寸
+                    minSize: 44.0,
+                    //按下的透明度
+                    pressedOpacity: 0.1,
+                    //边框圆角
+                    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                    //点击事件
+                    onPressed: () => {
+                      print('点我干嘛'),
+
+                      //加入跳转函数
+                      if(defaultTargetPlatform == TargetPlatform.android){
+                      //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
+                      X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "服务时长")
+                      }else{
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
+                      }
+        
+                      }//onPressed
+                    ),
+                ],
               ),
 
-              CupertinoButton(
-              //按钮控件布局
-              child: Text('服务时长'),
-              //内边距
-              padding: EdgeInsets.all(10.0),
-              //背景颜色
-              color: Colors.blue,
-              //onPress 为 null，禁用点击的背景颜色
-              disabledColor: Colors.grey,
-              //最小尺寸
-              minSize: 44.0,
-              //按下的透明度
-              pressedOpacity: 0.1,
-              //边框圆角
-              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-              //点击事件
-              onPressed: () => {
-                print('点我干嘛'),
-
-                //加入跳转函数
-                if(defaultTargetPlatform == TargetPlatform.android){
-                //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
-                X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "服务时长")
-                }else{
-                //Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
-                Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
-                }
-                
-                }//onPressed
-              ),
+              
 
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Provider.of<Counter>(context, listen: false).increment();
-            print("${Provider.of<Counter>(context, listen: false).count}");
-          },
-          child: Icon(Icons.add),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
       );
       
     }else{
@@ -218,26 +238,27 @@ class _FirstPageState extends State<FirstPage> {
                     ),
           ],
         ),
-        body: GestureDetector(
+        body: Center(
           child: Column(
             children: <Widget>[
-              Text("${wangStateCode}"),
+              //Text("${wangStateCode}"),
+              Image.asset('assets/flujmyg.png'),
               //Text("${Provider.of<Counter>(context, listen: true).count}"),
               
               //Text("${Provider.of<SessionStr>(context, listen: true).sessionStr}"),
-              Text('请先登录'),
-              Text('志愿者姓名：${hereRealName}'),
-              Text('所属组织：${hereDeptName}'),
+              Text('右上登录江门义工网',style: TextStyle(fontSize: 20),),
+              //Text('志愿者姓名：${hereRealName}'),
+              //Text('所属组织：${hereDeptName}'),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Provider.of<Counter>(context, listen: false).increment();
-            print("${Provider.of<Counter>(context, listen: false).count}");
-          },
-          child: Icon(Icons.add),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     Provider.of<Counter>(context, listen: false).increment();
+        //     print("${Provider.of<Counter>(context, listen: false).count}");
+        //   },
+        //   child: Icon(Icons.add),
+        // ), // This trailing comma makes auto-formatting nicer for build methods.
       );
     }// if else
   }

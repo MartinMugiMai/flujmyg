@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<LocalDeptName>(create:(context) => LocalDeptName(),),
     ],
     child: MaterialApp(
-      title: "provider实例",
+      title: "江门义工查询",
       theme: ThemeData(
         primarySwatch: Colors.blue,
         
