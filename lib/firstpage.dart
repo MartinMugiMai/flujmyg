@@ -6,16 +6,19 @@ import 'package:flujmyg/countermodel.dart';
 import 'package:flujmyg/secondpage.dart';
 import 'package:flujmyg/historySerPage.dart';
 import 'package:flujmyg/serTimePage.dart';
+import 'package:flujmyg/settingPage.dart';
 import 'package:flujmyg/HttpDio.dart';
 import 'dart:convert';
 import 'package:flujmyg/sessionStrmodel.dart';
 import 'package:flujmyg/ygInfoModel.dart';
 import 'package:flujmyg/localRealNameModel.dart';
 import 'package:flujmyg/localDeptNameModel.dart';
+import 'package:flujmyg/x5BootStateModel.dart';
 
 import 'package:x5_webview/x5_webview.dart';
 import 'package:x5_webview/x5_sdk.dart';
 import 'package:flutter/src/foundation/platform.dart';
+
 
 class FirstPage extends StatefulWidget {
   @override
@@ -105,7 +108,7 @@ class _FirstPageState extends State<FirstPage> {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('flutter实现的江门义工时查询'),
+          title: Text('江门义工时查询'),
           actions: <Widget>[
             FlatButton(
                 child: Text(dengPageButtonTitle),
@@ -120,6 +123,7 @@ class _FirstPageState extends State<FirstPage> {
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment : MainAxisAlignment.spaceAround,
             children: <Widget>[
               //Text("${wangStateCode}"),
               
@@ -173,8 +177,13 @@ class _FirstPageState extends State<FirstPage> {
                     //'http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: true).sessionStr}'
                     if(defaultTargetPlatform == TargetPlatform.android){
                       //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
+                      if(Provider.of<X5BootState>(context, listen: false).x5BootState == true){
+                        X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "历史活动")
+                      }else if(Provider.of<X5BootState>(context, listen: false).x5BootState == false){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
+                      }
                       //Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
-                      X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "历史活动")
+                      //X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/activityList.do?type=3&sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "历史活动")
                     }else{
                       Navigator.push(context, MaterialPageRoute(builder: (context) {return HistorySerPage();}))
                     }
@@ -202,8 +211,14 @@ class _FirstPageState extends State<FirstPage> {
 
                       //加入跳转函数
                       if(defaultTargetPlatform == TargetPlatform.android){
-                      //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
-                      X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "服务时长")
+                        if(Provider.of<X5BootState>(context, listen: false).x5BootState == true){
+                          X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "服务时长")
+                        }else if(Provider.of<X5BootState>(context, listen: false).x5BootState == false){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
+                        }
+                        //X5Sdk.openWebActivity("https://www.baidu.com",title: "web页面")
+
+                        //X5Sdk.openWebActivity('http://113.107.136.252/Mobile/Member/serviceTotal.do?sessionStr=${Provider.of<SessionStr>(context, listen: false).sessionStr}',title: "服务时长")
                       }else{
                       //Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
                       Navigator.push(context, MaterialPageRoute(builder: (context) {return SerTimePage();}))
@@ -211,8 +226,15 @@ class _FirstPageState extends State<FirstPage> {
         
                       }//onPressed
                     ),
+                    
                 ],
               ),
+
+              FlatButton(onPressed: () =>{
+                Navigator.push(context, MaterialPageRoute(builder: (context){return SettingPage();}))
+                }, 
+                child: Text('设置关于')
+                ),
 
               
 
@@ -225,7 +247,7 @@ class _FirstPageState extends State<FirstPage> {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('flutter实现的江门义工时查询'),
+          title: Text('江门义工时查询'),
           actions: <Widget>[
             FlatButton(
                 child: Text(dengPageButtonTitle),
@@ -249,9 +271,17 @@ class _FirstPageState extends State<FirstPage> {
               Text('右上登录江门义工网',style: TextStyle(fontSize: 20),),
               //Text('志愿者姓名：${hereRealName}'),
               //Text('所属组织：${hereDeptName}'),
+
+              FlatButton(onPressed: () =>{
+                Navigator.push(context, MaterialPageRoute(builder: (context){return SettingPage();}))
+                }, 
+                child: Text('设置关于')
+                ),
             ],
           ),
+          
         ),
+        
         // floatingActionButton: FloatingActionButton(
         //   onPressed: () {
         //     Provider.of<Counter>(context, listen: false).increment();
