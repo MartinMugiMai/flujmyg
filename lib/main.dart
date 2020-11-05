@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<X5BootState>(create:(context) => X5BootState(),),
     ],
     child: MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "江门义工查询",
       theme: ThemeData(
         primarySwatch: Colors.blue,
