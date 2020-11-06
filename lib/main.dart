@@ -5,6 +5,7 @@ import 'package:flujmyg/countermodel.dart';
 import 'package:flujmyg/sessionStrmodel.dart';
 import 'package:flujmyg/localRealNameModel.dart';
 import 'package:flujmyg/localDeptNameModel.dart';
+import 'package:flujmyg/localGyCardNoModel.dart';
 import 'package:flujmyg/x5BootStateModel.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<LocalRealName>(create:(context) => LocalRealName(),),
       ChangeNotifierProvider<LocalDeptName>(create:(context) => LocalDeptName(),),
       ChangeNotifierProvider<X5BootState>(create:(context) => X5BootState(),),
+      ChangeNotifierProvider<LocalGyCardNo>(create:(context) => LocalGyCardNo(),),
     ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,

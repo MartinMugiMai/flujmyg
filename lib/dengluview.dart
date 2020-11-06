@@ -11,6 +11,7 @@ import 'package:flujmyg/sessionStrmodel.dart';
 import 'package:flujmyg/ygInfoModel.dart';
 import 'package:flujmyg/localRealNameModel.dart';
 import 'package:flujmyg/localDeptNameModel.dart';
+import 'package:flujmyg/localGyCardNoModel.dart';
 
 class DengLuView extends StatefulWidget {
   @override
@@ -28,8 +29,9 @@ class _DengLuViewState extends State<DengLuView> {
 
   YgInfoModel ygInfo = YgInfoModel();
   
-  String localRealName = '666';
-  String localDeptName = '666';
+  String localRealName = '233';
+  String localDeptName = '233';
+  String localGyCardNo = '233';
 
 
   @override
@@ -105,6 +107,10 @@ class _DengLuViewState extends State<DengLuView> {
       localDeptName = ygInfo.data[0].DeptName;
       Provider.of<LocalDeptName>(context, listen: false).addlocalDeptName(localDeptName);
       print(localDeptName);
+      print(ygInfo.data[0].GyCardNo);
+      localGyCardNo = ygInfo.data[0].GyCardNo;
+      Provider.of<LocalGyCardNo>(context, listen: false).addlocalGyCardNo(localGyCardNo);
+      print(localGyCardNo);
       //print(dengModel.resultCode);
       //dengStateCode = dengModel.resultCode;
 

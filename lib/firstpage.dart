@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:flujmyg/localGyCardNoModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -81,6 +82,7 @@ class _FirstPageState extends State<FirstPage> {
     String heresessionStr = "${Provider.of<SessionStr>(context, listen: true).sessionStr}";
     String hereRealName = Provider.of<LocalRealName>(context, listen: true).localRealName;
     String hereDeptName = Provider.of<LocalDeptName>(context, listen: true).localDeptName;
+    String hereGyCardNo = Provider.of<LocalGyCardNo>(context, listen: true).localGyCardNo;
     String dengPageButtonTitle = '去登录';
     // if (heresessionStr != '') {
     //   dengPageButtonTitle = '切换账号';
@@ -139,7 +141,8 @@ class _FirstPageState extends State<FirstPage> {
                     child: Column(
                       children: [
                       Text('志愿者姓名：${hereRealName}',style: TextStyle(fontSize: 20),),
-                      Text('所属组织：${hereDeptName}',style: TextStyle(fontSize: 10),),
+                      Text('志愿者号：${hereGyCardNo}', style: TextStyle(fontSize: 14),),
+                      Text('所属组织：${hereDeptName}',style: TextStyle(fontSize: 11),),
                       ],
                     ),
                   )
